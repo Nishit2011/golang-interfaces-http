@@ -7,6 +7,12 @@ As you can see in the "different,sources, returns.png" screenshot, in order to w
 And that very problem is solved when we use the Reader interface.
 
 type Reader interface {
+    //remember request body is implementing the reader interface
+    //so create this byte slice and pass it to the Read function and then inside of //the read function. That function takes the byte slice and its source of data
+    //So the raw body of response is taken and injected inside or pushed into that //byte slice. 
+
+    //int is the number of integers read into the byte slice
+    
     Read(p []byte) (n int, err error)
 }
 
