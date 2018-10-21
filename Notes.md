@@ -24,4 +24,4 @@ The Writer interface takes some data from our program and chanels out some form 
 
 To say that a type satisfies an interface means that the type implements all of the functions containing in the interface definition
 
-Reader interface reads info from an outside data source into our app
+Reader interface reads info from an outside data source into our app  
