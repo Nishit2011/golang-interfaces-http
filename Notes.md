@@ -17,3 +17,6 @@ type Reader interface {
 }
 
 So no matter what the different sources are, when we use reader interface, then we get some very common interface or some common point of contact that we can use to take that input and then pipe it off to different places inside of our codebase without writing a bunch of custom functions to work with each of these individual return types
+
+
+The Writer interface takes some data from our program and chanels out some form of output

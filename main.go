@@ -2,9 +2,12 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 )
+
+type logWriter struct{}
 
 func main() {
 	resp, err := http.Get("http://google.com")
@@ -14,14 +17,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	//making a byte slice
-	//make is a built in function that takes a type of slice and the second argument is empty space that
-	//you want the slice to be initialized with. if we ,make it 0, Read function will assume that the slice is already full. so 99999 is kind of a guess about the empty space that would be needed for the slice
-	bs := make([]byte, 99999)
+	lw := logWriter{}
 
-	//the response body takes the byte slice and passes it to the Read function
-	resp.Body.Read(bs)
+	//io.Copy takes the first argument that takes a Writer interface and the second argument that takes a Reader interface
+	io.Copy(lw, resp.Body)
 
+}
+
+//the logWriter function is implementing Write interface
+func (logWriter) Write(bs []byte) (int, error) {
 	fmt.Println(string(bs))
-
+	fmt.Println("just wrote this many bytes:", len(bs))
+	return len(bs), nil
 }
